@@ -1,0 +1,67 @@
+{% extends "yogicoder/base.html" %}
+
+{% block title %} YogiCoder Courses {% endblock %}
+{%  block content %}
+
+<div class="container">
+    <h1><i class="fas fa-chalkboard-teacher"></i> Yogi Coder Courses </h1>
+    <hr>
+
+<table id="table_id" class="display" border='2' align="center"  style="width:100%">
+
+    <caption><i>Yogi Coder Class Offerings</i></caption>
+
+    <thead>
+ <tr>
+     <th>Course ID</th>
+     <th>Title</th>
+     <th >Description </th>
+     <th >Year Produced</th>
+     <th  >Series</th>
+     <th >Training URL</th>
+  </tr>
+ </thead>
+<tbody>
+    <tr >
+    {% for t in training %}
+        {% if  t.title != "None" %}
+        <TD class="c3" align="center">{{ t.courseID }}</TD>
+        <TD class="c3" align="center">{{ t.title }}</TD>
+        <TD class="c3" align="left">{{ t.description}}</TD>
+        <TD class="c3" align="center">{{ t.yearProd| date:"Y" }}</TD>
+        <TD class="c3" align="center" ><h6>{{ t.series }}</h6></TD>
+            {% if t.location not in " " %}
+{#                 <TD class="c3" align="center" bgcolor="#8fbc8f"><a href="{{ t.location }}">Training Link</a></TD>#}
+                <TD class="c4" align="center" width="8%" > <a href="{{ t.location }}" class="btn btn-success btn-sm">Link</a></TD>
+                {% else %}
+                <TD class="c3" align="center" bgcolor="#dcdcdc"><h6>{{ t.location }}</h6></TD>
+                {%  endif %}
+{#            <span class="label label-success"><a href="{{ t.location }}">Training Link</a></span>#}
+        {% endif %}
+    </tr>
+   {% endfor %}
+</tbody>
+    </table>
+    <hr>
+{% endblock %}
+ {% block js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
+<script>
+    $(document).ready( function () {
+    $('#table_id').DataTable({
+
+    dom: 'B<"clear">lfrtip',
+    buttons: {
+        name: 'primary',
+        buttons: [ 'copy', 'csv', 'excel', 'pdf' ]
+
+        }}
+    );
+} );
+</script>
+</div>
+{% endblock %}
