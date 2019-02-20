@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<!-- needed for dataTales-->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+</head>
+<body>
+
+<table id="table_id" class="display cell-border compact stripe">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Date2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Sally</td>
+            <td>Aug 12, 2018</td>
+            <td>12-Aug-18</td>
+        </tr>
+        <tr>
+            <td>Joe</td>
+            <td>Apr 12, 2019</td>
+            <td>12-Apr-19</td>
+        </tr>
+        <tr>
+            <td>Brian</td>
+            <td>May 12, 2017</td>
+            <td>12-May-17</td>
+        </tr>
+        <tr>
+            <td>Gary</td>
+            <td>Dec 12, 2016</td>
+            <td>12-Dec-16</td>
+        </tr>
+
+        <tr>
+            <td>Joan</td>
+            <td>Jan 15, 2016</td>
+            <td>15-Jan-16</td>
+        </tr>
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
+<!-- needed to use moment.js for our date sorting-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+
+
+
+<!-- the second way to do it to integrate our buttons for export-->
+
+<script>
+    $(document).ready( function () {
+
+    $.fn.dataTable.moment( 'MMM D, YYYY' );
+    $.fn.dataTable.moment( 'D-MMM-YY' );
+    $('#table_id').DataTable({
+
+    dom: 'B<"clear">lfrtip',
+    buttons: {
+        name: 'primary',
+        buttons: [ 'copy', 'csv', 'excel', 'pdf' ]
+
+        }}
+    );
+} );
+</script>
+</body>
+</html>
